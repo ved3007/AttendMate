@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- Primary Meta Tags -->
+    <title>AttendMate – Smart Attendance Calculator & Planner</title>
+    <meta name="title" content="AttendMate – Smart Attendance Calculator & Planner" />
+    <meta name="description" content="Calculate your current attendance, predict future attendance, and calculate lectures required to reach your 75% target percentage with AttendMate." />
+    <meta name="keywords" content="attendance calculator, college attendance, 75 percent attendance, future attendance calculator, lectures required calculator, attendwise, attendmate, student attendance planner" />
+    <meta name="author" content="Ved Jagdishbhai Chaudhari" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#2563eb" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AttendMate – Smart Attendance Calculator" />
+    <meta property="og:description" content="Know your attendance, plan your classes. Calculate current percentage, future projections, and lectures required to achieve target attendance." />
+    <meta property="og:site_name" content="AttendMate" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AttendMate – Smart Attendance Calculator" />
+    <meta name="twitter:description" content="Know your attendance, plan your classes. Calculate current percentage, future projections, and lectures required to achieve target attendance." />
+
+    <!-- Favicon SVG representation -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M22 10v6M2 10l10-5 10 5-10 5z'/><path d='M6 12v5c3 3 9 3 12 0v-5'/></svg>" type="image/svg+xml" />
+
+    <!-- Schema.org WebApplication JSON-LD for Strong SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "AttendMate",
+      "alternateName": "AttendWise",
+      "url": "https://attendmate.app",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires Google Chrome, Apple Safari, Microsoft Edge, Mozilla Firefox, or Brave",
+      "description": "Smart attendance calculator allowing students to calculate current attendance, simulate future lectures, and determine consecutive classes needed for 75% target.",
+      "creator": {
+        "@type": "Person",
+        "name": "Ved Jagdishbhai Chaudhari"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Site Header -->
+    <header class="site-header" id="siteHeader">
+      <div class="container header-inner">
+        <!-- Left Side: Website name & Slogan -->
+        <a href="#home" class="brand-wrapper" data-view-target="homeView" id="brandLogoLink">
+          <div class="brand-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+          <div class="brand-info">
+            <div class="brand-name">Attend<span>Mate</span></div>
+            <div class="brand-slogan">Smart attendance calculation</div>
+          </div>
+        </a>
+
+        <!-- Right Side: Desktop Navigation Menu -->
+        <nav class="desktop-nav" aria-label="Main Navigation">
+          <button type="button" class="nav-link active" data-view-target="homeView" id="navHomeBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Home
+          </button>
+          <button type="button" class="nav-link" data-view-target="aboutView" id="navAboutBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            About Us
+          </button>
+          <button type="button" class="nav-link nav-cta-btn" data-scroll-to="calcSection" id="navQuickCalcBtn">
+            Calculators
+          </button>
+        </nav>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <line x1="4" y1="18" x2="20" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Drawer -->
+      <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-nav-links">
+          <button type="button" class="mobile-nav-link active" data-view-target="homeView" id="mNavHomeBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Home
+          </button>
+          <button type="button" class="mobile-nav-link" data-view-target="aboutView" id="mNavAboutBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            About Us
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+      <!-- =========================================================
+           HOME PAGE VIEW
+           ========================================================= -->
+      <section class="page-view active-view" id="homeView">
+        <div class="container">
+          <!-- Hero Section -->
+          <div class="hero-section">
+            <div class="badge-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Fast & Accurate Academic Calculator
+            </div>
+            <h1 class="hero-headline">Know Your Attendance. Plan Your Classes with Precision.</h1>
+            <p class="hero-description">
+              AttendMate provides students with a simple and accurate way to calculate current attendance, predict future lecture outcomes, and discover the exact consecutive lectures required to hit your target.
+            </p>
+            <div class="hero-cta-group">
+              <button type="button" class="btn btn-primary" data-scroll-to="optionOneCard" id="heroCtaOption1">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+                Option 1: Future Attendance
+              </button>
+              <button type="button" class="btn btn-secondary" data-scroll-to="optionTwoCard" id="heroCtaOption2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+                Option 2: Target Goal (75%)
+              </button>
+            </div>
+
+            <!-- 3 Highlights Strip -->
+            <div class="features-strip">
+              <div class="feature-pill">
+                <div class="feature-pill-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="feature-pill-title">Instant Calculation</div>
+                  <div class="feature-pill-subtitle">Real-time reactive formulas</div>
+                </div>
+              </div>
+
+              <div class="feature-pill">
+                <div class="feature-pill-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="6"/>
+                    <circle cx="12" cy="12" r="2"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="feature-pill-title">75% Target Standard</div>
+                  <div class="feature-pill-subtitle">Customizable target rates</div>
+                </div>
+              </div>
+
+              <div class="feature-pill">
+                <div class="feature-pill-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2"/>
+                    <path d="m9 12 2 2 4-4"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="feature-pill-title">Private & Client-Side</div>
+                  <div class="feature-pill-subtitle">Works across all browsers</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calculators Section -->
+          <div class="calculators-wrapper" id="calcSection">
+            
+            <!-- OPTION 1 CALCULATOR -->
+            <div class="calc-card-container" id="optionOneCard">
+              <div class="calc-section-header">
+                <div class="calc-title">
+                  Option 1: Future Attendance Predictor
+                  <span class="calc-badge">Dynamic Forecast</span>
+                </div>
+                <p class="calc-subtitle">Calculate how attending or missing future lectures affects your overall attendance percentage.</p>
+              </div>
+
+              <div class="calc-card-grid">
+                <!-- Form Inputs -->
+                <div class="calc-form">
+                  <div class="input-grid-2">
+                    <div class="input-group">
+                      <label for="c1_total" class="input-label">
+                        Total Lectures (Till Date)
+                        <span class="input-hint">Required</span>
+                      </label>
+                      <div class="input-field-wrap">
+                        <input type="number" id="c1_total" class="input-field" value="40" min="1" step="1" inputmode="numeric" placeholder="e.g. 40" />
+                      </div>
+                    </div>
+
+                    <div class="input-group">
+                      <label for="c1_present" class="input-label">
+                        Present Lectures
+                        <span class="input-hint">Attended</span>
+                      </label>
+                      <div class="input-field-wrap">
+                        <input type="number" id="c1_present" class="input-field" value="28" min="0" step="1" inputmode="numeric" placeholder="e.g. 28" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="c1_absent" class="input-label">
+                      Absent Lectures
+                      <span class="input-hint">Auto-calculated</span>
+                    </label>
+                    <div class="input-field-wrap">
+                      <input type="number" id="c1_absent" class="input-field" value="12" min="0" step="1" inputmode="numeric" placeholder="Total - Present" />
+                    </div>
+                  </div>
+
+                  <div class="input-grid-2">
+                    <div class="input-group">
+                      <label for="c1_upcoming" class="input-label">
+                        Upcoming Lectures
+                        <span class="input-hint">Scheduled</span>
+                      </label>
+                      <div class="input-field-wrap">
+                        <input type="number" id="c1_upcoming" class="input-field" value="10" min="0" step="1" inputmode="numeric" placeholder="e.g. 10" />
+                      </div>
+                    </div>
+
+                    <div class="input-group">
+                      <label for="c1_attended_upcoming" class="input-label">
+                        Planned to Attend
+                        <span class="input-hint">Will attend</span>
+                      </label>
+                      <div class="input-field-wrap">
+                        <input type="number" id="c1_attended_upcoming" class="input-field" value="10" min="0" step="1" inputmode="numeric" placeholder="e.g. 10" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Preset Helpers & Reset -->
+                  <div class="chips-container">
+                    <button type="button" class="chip-btn" id="c1_attend_all">Attend All Upcoming</button>
+                    <button type="button" class="chip-btn" id="c1_miss_all">Miss All Upcoming</button>
+                    <button type="button" class="chip-btn" id="c1_reset">Reset Sample</button>
+                  </div>
+                </div>
+
+                <!-- Live Results Panel -->
+                <div class="calc-result-panel">
+                  <div>
+                    <div class="result-header">
+                      <div class="result-heading">Calculation Summary</div>
+                      <div class="result-status-tag" id="c1_status_tag">Active</div>
+                    </div>
+
+                    <!-- Dynamic Outcome Message specified in prompt -->
+                    <div class="outcome-banner gain" id="c1_outcome_banner">
+                      <div class="outcome-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <div class="outcome-text" id="c1_outcome_text">Calculating...</div>
+                        <div class="outcome-subtext" id="c1_outcome_sub">Future scenario outcome</div>
+                      </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="metrics-grid">
+                      <div class="metric-item">
+                        <div class="metric-label">Current Attendance</div>
+                        <div class="metric-value" id="c1_current_percent">70.00%</div>
+                        <div class="metric-note">Present / Total</div>
+                      </div>
+
+                      <div class="metric-item">
+                        <div class="metric-label">Future Attendance</div>
+                        <div class="metric-value" id="c1_future_percent">76.00%</div>
+                        <div class="metric-note">After upcoming lectures</div>
+                      </div>
+
+                      <div class="metric-item">
+                        <div class="metric-label">Percentage Change</div>
+                        <div class="metric-value" id="c1_change_val">+6.00%</div>
+                        <div class="metric-note">Future - Current</div>
+                      </div>
+
+                      <div class="metric-item">
+                        <div class="metric-label">Future Record</div>
+                        <div class="metric-value" id="c1_projected_ratio">38 / 50</div>
+                        <div class="metric-note">Future Present / Future Total</div>
+                      </div>
+                    </div>
+
+                    <!-- Visual Progress Bar -->
+                    <div class="attendance-progress-wrap">
+                      <div class="progress-labels">
+                        <span>Projected Attendance</span>
+                        <span>Min Threshold: 75%</span>
+                      </div>
+                      <div class="progress-track">
+                        <div class="progress-fill success" id="c1_progress_bar" style="width: 76%;"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="formula-tooltip">
+                    <strong>Universal Formula:</strong> Current = (Present / Total) × 100 | Future = (Future Present / Future Total) × 100
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- OPTION 2 CALCULATOR -->
+            <div class="calc-card-container" id="optionTwoCard">
+              <div class="calc-section-header">
+                <div class="calc-title">
+                  Option 2: Lectures Required for Target Attendance
+                  <span class="calc-badge">Goal Planner</span>
+                </div>
+                <p class="calc-subtitle">Determine exactly how many consecutive lectures you need to attend to achieve your target percentage.</p>
+              </div>
+
+              <div class="calc-card-grid">
+                <!-- Form Inputs -->
+                <div class="calc-form">
+                  <div class="input-grid-2">
+                    <div class="input-group">
+                      <label for="c2_total" class="input-label">
+                        Total Lectures Till Date
+                        <span class="input-hint">Required</span>
+                      </label>
+                      <div class="input-field-wrap">
+                        <input type="number" id="c2_total" class="input-field" value="50" min="1" step="1" inputmode="numeric" placeholder="e.g. 50" />
+                      </div>
+                    </div>
+
+                    <div class="input-group">
+                      <label for="c2_present" class="input-label">
+                        Present Lectures Till Date
+                        <span class="input-hint">Attended</span>
+                      </label>
+                      <div class="input-field-wrap">
+                        <input type="number" id="c2_present" class="input-field" value="32" min="0" step="1" inputmode="numeric" placeholder="e.g. 32" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="c2_absent" class="input-label">
+                      Absent Lectures
+                      <span class="input-hint">Auto-calculated</span>
+                    </label>
+                    <div class="input-field-wrap">
+                      <input type="number" id="c2_absent" class="input-field" value="18" min="0" step="1" inputmode="numeric" placeholder="Total - Present" />
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="c2_target" class="input-label">
+                      Target Attendance Percentage (%)
+                      <span class="input-hint">Default: 75%</span>
+                    </label>
+                    <div class="input-field-wrap">
+                      <input type="number" id="c2_target" class="input-field" value="75" min="1" max="100" step="1" inputmode="numeric" placeholder="75" />
+                    </div>
+                  </div>
+
+                  <!-- Quick Chips for Target -->
+                  <div>
+                    <div class="input-label" style="margin-bottom: 6px;">Quick Select Target:</div>
+                    <div class="chips-container">
+                      <button type="button" class="chip-btn" data-target-val="65">65%</button>
+                      <button type="button" class="chip-btn" data-target-val="70">70%</button>
+                      <button type="button" class="chip-btn active" data-target-val="75">75% (Standard)</button>
+                      <button type="button" class="chip-btn" data-target-val="80">80%</button>
+                      <button type="button" class="chip-btn" data-target-val="85">85%</button>
+                      <button type="button" class="chip-btn" data-target-val="90">90%</button>
+                      <button type="button" class="chip-btn" id="c2_reset">Reset Sample</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Live Results Panel -->
+                <div class="calc-result-panel">
+                  <div>
+                    <div class="result-header">
+                      <div class="result-heading">Target Goal Analysis</div>
+                      <div class="result-status-tag" id="c2_status_tag">Analysis</div>
+                    </div>
+
+                    <!-- Dynamic Outcome Message specified in prompt -->
+                    <div class="outcome-banner needed" id="c2_outcome_banner">
+                      <div class="outcome-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"/>
+                          <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <div class="outcome-text" id="c2_outcome_text">Calculating required lectures...</div>
+                        <div class="outcome-subtext" id="c2_outcome_sub">Target status details</div>
+                      </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="metrics-grid">
+                      <div class="metric-item">
+                        <div class="metric-label">Current Attendance</div>
+                        <div class="metric-value" id="c2_current_percent">64.00%</div>
+                        <div class="metric-note">32 / 50 Lectures</div>
+                      </div>
+
+                      <div class="metric-item">
+                        <div class="metric-label">Target Rate</div>
+                        <div class="metric-value" id="c2_target_percent">75%</div>
+                        <div class="metric-note">Selected Target</div>
+                      </div>
+
+                      <div class="metric-item">
+                        <div class="metric-label">Lectures Required</div>
+                        <div class="metric-value" id="c2_lectures_req_val" style="color: var(--color-primary);">22</div>
+                        <div class="metric-note">Consecutive attendance</div>
+                      </div>
+
+                      <div class="metric-item">
+                        <div class="metric-label">Bunk Allowance</div>
+                        <div class="metric-value" id="c2_safe_bunks_val">0</div>
+                        <div class="metric-note">Classes you can miss</div>
+                      </div>
+                    </div>
+
+                    <!-- Visual Progress Bar -->
+                    <div class="attendance-progress-wrap">
+                      <div class="progress-labels">
+                        <span>Current Progress Toward Target</span>
+                        <span id="c2_progress_label">Target: 75%</span>
+                      </div>
+                      <div class="progress-track">
+                        <div class="progress-fill warning" id="c2_progress_bar" style="width: 85%;"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="formula-tooltip">
+                    <strong>Universal Formula:</strong> Lectures Required = ((Target Rate × Total) - Present) / (1 - Target Rate) (Rounded UP)
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           ABOUT US PAGE VIEW
+           ========================================================= -->
+      <section class="page-view" id="aboutView">
+        <div class="container about-container">
+          <div class="about-card">
+            <div class="about-header">
+              <div class="about-tag">Student Attendance Portal</div>
+              <h2 class="about-title">About AttendWise</h2>
+            </div>
+
+            <div class="about-body">
+              <p>
+                <strong>AttendWise</strong> is a simple and student-friendly attendance calculator designed to make attendance management easier.
+              </p>
+
+              <p>
+                Students often need to calculate their attendance before deciding how many lectures they can miss or how many lectures they need to attend to reach their required attendance percentage. Manually calculating these values can be confusing and time-consuming.
+              </p>
+
+              <p>
+                AttendWise solves this problem with simple and accurate calculations. Students can enter their <strong>total lectures, present lectures, and absent lectures</strong> to calculate their current attendance. They can also enter the number of future lectures they plan to attend and see their expected future attendance.
+              </p>
+
+              <p>
+                The website also allows students to choose their own <strong>target attendance percentage</strong>, with <strong>75% as the default target</strong>, and calculates how many lectures they need to attend continuously to achieve that target.
+              </p>
+
+              <div class="purpose-box">
+                <div class="purpose-title">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 14 10"/>
+                  </svg>
+                  Our Purpose
+                </div>
+                <p>
+                  Our purpose is to help students understand, calculate, and plan their lecture attendance quickly and easily.
+                </p>
+                <div class="purpose-motto">
+                  AttendWise — Know Your Attendance. Plan Your Classes.
+                </div>
+              </div>
+
+              <div>
+                <div class="creator-credit-badge">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  <span>Website created by <strong>Ved Jagdishbhai Chaudhari</strong> and help with AI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Frequently Asked Questions -->
+          <div class="faq-section">
+            <h3 class="faq-title">Frequently Asked Questions</h3>
+            <div class="faq-grid">
+              <div class="faq-item active">
+                <button type="button" class="faq-question" aria-expanded="true">
+                  <span>Why is 75% attendance the standard target?</span>
+                  <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  Most educational institutions, universities, and regulatory boards mandate a minimum of 75% attendance for students to be eligible to sit for semester examinations. AttendWise uses 75% as the default target, while letting you customize it freely.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button type="button" class="faq-question" aria-expanded="false">
+                  <span>How does Option 1 predict my future attendance?</span>
+                  <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  Option 1 takes your upcoming lectures and adds them to your existing total, while adding your planned attended lectures to your present count. It calculates your new projected percentage and tells you whether you will gain or lose percentage points.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button type="button" class="faq-question" aria-expanded="false">
+                  <span>How is the lectures required formula calculated?</span>
+                  <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  The universal mathematical formula solves for consecutive attendance: <br>
+                  <code>Lectures Required = ((Target Rate × Total) - Present) / (1 - Target Rate)</code>. <br>
+                  The result is rounded UP to the nearest whole integer so you hit or exceed your required threshold.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button type="button" class="faq-question" aria-expanded="false">
+                  <span>Is my attendance data saved or tracked?</span>
+                  <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  No. All calculations run strictly client-side inside your browser. No personal data, attendance logs, or academic records are sent to any remote server or stored in an external database.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" id="siteFooter">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+              </svg>
+              <span>AttendMate</span>
+            </div>
+            <p class="footer-desc">
+              Smart attendance calculation. Helping students understand, calculate, and plan lecture attendance quickly and accurately.
+            </p>
+          </div>
+
+          <div>
+            <div class="footer-heading">Navigation</div>
+            <ul class="footer-links">
+              <li><a href="#home" class="footer-link" data-view-target="homeView">Home</a></li>
+              <li><a href="#about" class="footer-link" data-view-target="aboutView">About Us</a></li>
+              <li><a href="#optionOneCard" class="footer-link" data-scroll-to="optionOneCard">Future Attendance Predictor</a></li>
+              <li><a href="#optionTwoCard" class="footer-link" data-scroll-to="optionTwoCard">Target Goal Calculator</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-heading">Compatibility</div>
+            <p style="font-size: 0.88rem; line-height: 1.6; color: #94a3b8;">
+              Optimized for Google Chrome, Apple Safari, Microsoft Edge, Mozilla Firefox, Brave across macOS, Windows, Linux, Android, iOS, and Chrome OS.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>
+            © 2026 AttendMate. All rights reserved.
+          </div>
+          <div class="footer-credit">
+            Website created by <strong>Ved Jagdishbhai Chaudhari</strong> and help with AI
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- App JavaScript -->
+    <script src="./script.js"></script>
+  </body>
+</html>
